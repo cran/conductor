@@ -1,0 +1,11 @@
+c3fd9255fd22cd53fe17ffa2d03b5888 *DESCRIPTION
+cb43c68fcccc3d73c6cbf110369ff679 *LICENSE
+598194c2455c1065357a6441c316fd5b *NAMESPACE
+60a14e64c794866f14ebe35184f84308 *NEWS.md
+ebfe9df61983213544adc4625c84aa44 *R/conductor.R
+c47c8bca83e3a3bb757d45a2faf415c3 *R/zzz.R
+cb4427031800b60b86358517aae7a0da *README.md
+d8d9192aee7243be14ace0ee358b25a2 *inst/packer/conductor.js
+fa7590712ceb4a8aa3716fd42acf6331 *inst/packer/conductor.js.LICENSE.txt
+bc64fd326b231af61c6a0a4291fe1ec1 *man/Conductor.Rd
+02e76334d193e3f016713ecef5a60898 *man/use_conductor.Rd
