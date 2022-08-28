@@ -119,6 +119,13 @@ Conductor <- R6::R6Class(
         progress = progress
       )
 
+      if (is.null(private$globals$defaultStepOptions$scrollTo)) {
+        private$globals$defaultStepOptions$scrollTo <- list(
+          behavior = "smooth",
+          block = "center"
+        )
+      }
+
       private$mathjax <- mathjax
       invisible(self)
     },
@@ -211,7 +218,7 @@ Conductor <- R6::R6Class(
 
     step = function(title = NULL, text = NULL, el = NULL, position = NULL,
                     arrow = TRUE, tabId = NULL, tab = NULL, canClickTarget = TRUE,
-                    advanceOn = NULL, scrollTo = TRUE, cancelIcon = NULL,
+                    advanceOn = NULL, scrollTo = NULL, cancelIcon = NULL,
                     showOn = NULL, id = NULL, buttons = NULL,
                     classes = NULL, highlightClass = NULL, onComplete = NULL,
                     onCancel = NULL, onHide = NULL, onShow = NULL) {
@@ -260,9 +267,9 @@ Conductor <- R6::R6Class(
       }
       if(!is.null(title)) popover$title <- as.character(title)
       if(!is.null(text)) popover$text <- as.character(text)
+      if(!is.null(scrollTo)) popover$scrollTo <- scrollTo
       popover$canClickTarget <- canClickTarget
       popover$arrow <- arrow
-      popover$scrollTo <- scrollTo
       popover$showOn <- showOn
       popover$tab <- tab
       popover$tabId <- tabId
@@ -415,9 +422,9 @@ Conductor <- R6::R6Class(
       }
       if(!is.null(title)) popover$title <- as.character(title)
       if(!is.null(text)) popover$text <- as.character(text)
+      if(!is.null(scrollTo)) popover$scrollTo <- scrollTo
       popover$canClickTarget <- canClickTarget
       popover$arrow <- arrow
-      popover$scrollTo <- scrollTo
       popover$showOn <- showOn
       popover$tab <- tab
       popover$tabId <- tabId
@@ -636,27 +643,6 @@ Conductor <- R6::R6Class(
       )
       session$input[[paste0(private$id, "_target")]]
     },
-
-    #' @param step Id of the step (optional). If `NULL` (default), the current
-    #' step is used.
-    #' @param session A valid Shiny session. If `NULL` (default), the function
-    #' attempts to get the session with `shiny::getDefaultReactiveDomain()`.
-    #' @details
-    #' Returns a value `TRUE` or `FALSE` indicating whether the step is centered.
-    #'
-    isCentered = function(step = NULL, session = NULL) {
-      if(is.null(session)) {
-        session <- shiny::getDefaultReactiveDomain()
-      }
-      if (is.numeric(step)) {
-        stop("Method `isCentered()`: numeric values not supported in arg `step`.")
-      }
-      session$sendCustomMessage(
-        "conductor-isCentered", list(id = private$id, step = step)
-      )
-      session$input[[paste0(private$id, "_step_is_centered")]]
-    },
-
 
 
     #' @param step Id of the step (optional). If `NULL` (default), the current
